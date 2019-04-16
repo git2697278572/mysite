@@ -1,0 +1,5 @@
+{% autoescape off %} {# 转义,用来防止发送邮件的html有标签 #}
+    <p>{{ comment_text }}</p>
+    <a href="http://localhost:8000{{ url }}">点击查看</a>
+{% endautoescape %}
+{# 邮件查看内容 #}

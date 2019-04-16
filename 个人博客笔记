@@ -1,0 +1,102 @@
+from django.http import HttpResponse, Http404
+1.except Article.DoesNotExist:         网页不存在错误
+2.raise Http404("不存在")              raise抛出一个404错误
+3.重新给models添加一行内容时
+   makemigrations  先敲1  如果是时间格式再敲timezone.now  其他格式为数字或者不敲
+   from django.utils import timezone
+   models.DateTimeField(auto_now_add=True)   设置自动添加当前时间
+4.IDE(记事本,编辑器)  sublime   用来编辑代码(各种语言)
+
+5. pip uninstall Django   控制台删除django环境
+
+6.sublime 的使用
+首选项中找到 "translate_tabs_to_spaces": true, 改成为 true
+ctrl + H 使用
+replace all 替换
+
+7.sublime安装插件(""号必须写)
+找到一个设置文档写入
+"channels":
+	[
+		"https://attachments-cdn.shimo.im/OykO0AIRnX0aeB4d/channel_v3.json"
+	],
+
+8.显示多少内容(过滤器)truncatechars 只显示前面30个字符
+{{blog.content | truncatechars:30}}
+
+9.韩顺平 学习css
+  * 代表所有标签
+
+10.python manage.py shell  进入编辑页面
+   from blog.models import Blog  加载页面
+   dir()                      查看model内容
+   Blog.objects.all()   查看文章内容
+   Blog.objects.count()  几篇
+>>> blog = Blog()       获取blog内容
+>>> dir()
+>>> Blog.objects.all()
+>>> blog.title="shell下第一篇文章"        给title添加内容
+>>> blog.content = "xxxxxxxxxxx"          添加内容
+>>> from blog.models import Blog
+>>> from blog.models import BlogType
+>>> BlogType.objects.all()
+>>> BlogType.objects.all()[0]
+>>> blog_type = BlogType.objects.all()[0]      获取第一个值
+>>> blog.blog_type=blog_type
+>>> from django.contrib.auth.models import User
+>>> user = User.objects.all()[0]
+>>> blog.author =user         博客发布者为user用户
+>>> blog.save()               保证
+------------------------
+dir(blog)  查询表中的方法
+循环添加文章内容----------------------
+注意缩进
+>>> blog = Blog();
+>>> for i in range(1,31):
+...   blog = Blog();
+...   blog.title = "循环文章";
+...   blog.content="xxx:%s"%i
+...   blog.blog_type = blog_type
+...   blog.author = user
+...   blog.save()
+...
+11. {% load staticfiles %}必须放在继承模板下
+    才能使用{% static 'xx'%}
+    href={% static 'xx' %}与href=/xx/xx是有区别的
+
+12.查询  __gt   lt   in
+13.annotate 拓展查询字段
+14.副文本编辑器  {{xxx | safe}}   可以在admin后台直接写html代码
+   1.pip install django-ckeditor
+   2.注册: settings   中INSTALLED_APPS 添加ckeditor
+   3.将models中models.TextField()  更改为RichTextField()
+   4.添加图片的富文本编辑
+     pip install pillow
+     注册: settings keditor_uploader
+     配置ckeditor
+     创建文件夹 media
+     # media
+    MEDIA_URL = '/media'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media'),
+
+    # 配置ckeditor
+    CKEDITOR_UPLOAD_PATH = 'upload/'
+    配置url
+    在总url中
+    path('ckeditor', include('ckeditor_uploader.urls')),
+    from django.conf import settings
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+    models 中 RichTextUploadingField
+    from ckeditor_uploader.fields import RichTextUploadingField
+15.www.hcharts.cn/docs   django 图像网页
+16. python manage.py createcachetable 创建缓存的表
+17.
+git 项目部署
+(1)集中式和分布式的概念
+ 官网下载git
+ 右击django项目文件 git base here
+
+
+
